@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Alumni Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('PUP\ OVERVIEW\ -\ Landing.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed; /* Change from absolute to fixed */
+            top: 0;
+            left: 0;
+            width: 100vw; /* Ensures it covers the full width */
+            height: 100vh; /* Ensures it covers the full height */
+            background: url('PUP\ OVERVIEW\ -\ Landing.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(5px) brightness(0.7); /* Blur + Dark Overlay */
+            z-index: -1;
+        }   
+
+
+       /* Header styles */
+       .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            padding: 20px;
+            background: #800000;
+            color: white;
+            position: relative;
+        }
+        .arcdo-logo {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .logo {
+            height: 80px; /* Increased size for better visibility */
+            width: auto;
+            margin: 0 20px;
+        }
+        .header div {
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        .service-card {
+            background-color: #a00;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .footer {
+            padding: 10px 0; /* Adjust padding to fine-tune positioning */
+            background: #800000;
+            color: white;
+            position: fixed; /* Changed to fixed to always stay at the bottom */
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="PUPLogo.png" alt="PUP Logo" class="logo">
+        <div>
+            <h3>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</h3>
+            <h5>ALUMNI RELATIONS & CAREER DEVELOPMENT OFFICE</h5>
+        </div>
+        <img src="arcdologo.jpg" alt="ARCDo Logo" class="arcdo-logo">
+    </div>
+    
+    <div class="container mt-4">
+        <h2 class="text-header fw-bold">SERVICES</h2>
+        <div class="row mt-4">
+            <div class="col-md-6 mb-3 d-flex">
+                <div class="service-card w-100">
+                    <h4>ALUMNI ID</h4>
+                    <p>Apply for your very own PUP Alumni ID. Just register and log in to request an ID.</p>
+                    <button class="btn btn-light" id="alumniIdBtn" data-bs-toggle="modal" data-bs-target="#alumniIdModal" disabled>Apply Now</button>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3 d-flex">
+                <div class="service-card w-100">
+                    <h4>REQUEST DOCUMENTS</h4>
+                    <p>Request documents online like TOR, Diploma, etc.</p>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#requestDocumentsModal">Request Now</button>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3 d-flex">
+                <div class="service-card w-100">
+                    <h4>YEARBOOK</h4>
+                    <p>Get a copy of your yearbook! Just register and log in to apply for a yearbook claiming.</p>
+                    <button class="btn btn-light" id="yearbookBtn" data-bs-toggle="modal" data-bs-target="#yearbookModal" disabled>Claim Now</button>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3 d-flex">
+                <div class="service-card w-100">
+                    <h4>CREATE RESUME</h4>
+                    <p>Create your resume online and download it for free!</p>
+                    <button class="btn btn-light" id="createResumeBtn" data-bs-toggle="modal" data-bs-target="#createResumeModal" disabled>Create Now</button>
+                </div>
+            </div>
+        </div>
+        <p class="footer-text text-center">To get full access to our online services, please register and log in to the alumni portal.</p>
+        <div class="text-center">
+            <a href="#" class="btn btn-danger">ALUMNI PORTAL</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p class="m-0 text-center w-100">&copy; 2025 PUP Alumni Relations & Career Development Office</p>
+    </div>
+    
+    <!-- Modals for Services -->
+    <div class="modal fade" id="alumniIdModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Alumni ID Application</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Alumni ID application process...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="requestDocumentsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Request Documents</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Document request process...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="yearbookModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Yearbook Claiming</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Yearbook claiming process...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="createResumeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Resume</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Resume creation process...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

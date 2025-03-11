@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Opportunities</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            padding: 20px;
+            background: #800000;
+            color: white;
+            position: relative;
+        }
+        .arcdo-logo {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .logo {
+            height: 80px;
+            width: auto;
+            margin: 0 20px;
+        }
+        .header div {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .job-listing {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #dc3545;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .job-listing:hover {
+            transform: scale(1.02);
+            background-color: #f8d7da;
+        }
+        .job-details {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .footer {
+            padding: 10px 0;
+            background: #800000;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+        .filter-icons {
+            display: flex;
+            gap: 10px;
+        }
+        .filter-icons i {
+            cursor: pointer;
+        }
+        /* Footer styles */
+        .footer {
+            padding: 10px 0; /* Adjust padding to fine-tune positioning */
+            background: #800000;
+            color: white;
+            position: fixed; /* Changed to fixed to always stay at the bottom */
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        function showJobDetails(title, description, location, salary, experience, type) {
+            document.getElementById('job-title').innerText = title;
+            document.getElementById('job-description').innerText = description;
+            document.getElementById('job-location').innerText = location;
+            document.getElementById('job-salary').innerText = salary;
+            document.getElementById('job-experience').innerText = experience;
+            document.getElementById('job-type').innerText = type;
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <img src="PUPLogo.png" alt="PUP Logo" class="logo">
+        <div>
+            <h3>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</h3>
+            <h5>ALUMNI RELATIONS & CAREER DEVELOPMENT OFFICE</h5>
+        </div>
+        <img src="arcdologo.jpg" alt="ARCDo Logo" class="arcdo-logo">
+    </div>
+    
+    <div class="container mt-4">
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="card p-3">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" placeholder="Search job title">
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option selected>Location</option>
+                                <option>City A</option>
+                                <option>City B</option>
+                                <option>City C</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option selected>Job Type</option>
+                                <option>Full-Time</option>
+                                <option>Part-Time</option>
+                                <option>Contract</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 filter-icons">
+                            <button class="btn btn-danger w-100">Filter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="job-listing" onclick="showJobDetails('Software Engineer', 'Develop and maintain web applications...', 'City A, Country', '₱50,000', '2+ years', 'Full-Time')">
+                    <h6 class="text-danger">📌 Software Engineer</h6>
+                    <p><strong>📍 Location:</strong> City A, Country</p>
+                    <p><strong>💰 Salary:</strong> ₱50,000</p>
+                </div>
+                <div class="job-listing" onclick="showJobDetails('Data Analyst', 'Analyze data trends and generate reports...', 'City B, Country', '₱40,000', '1+ year', 'Part-Time')">
+                    <h6 class="text-danger">📌 Data Analyst</h6>
+                    <p><strong>📍 Location:</strong> City B, Country</p>
+                    <p><strong>💰 Salary:</strong> ₱40,000</p>
+                </div>
+                <div class="job-listing" onclick="showJobDetails('UI/UX Designer', 'Design user-friendly interfaces...', 'City C, Country', '₱45,000', '3+ years', 'Contract')">
+                    <h6 class="text-danger">📌 UI/UX Designer</h6>
+                    <p><strong>📍 Location:</strong> City C, Country</p>
+                    <p><strong>💰 Salary:</strong> ₱45,000</p>
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="job-details">
+                    <h4 class="text-primary" id="job-title">Select a job to view details</h4>
+                    <p><strong>📍 Location:</strong> <span id="job-location">-</span></p>
+                    <p><strong>💰 Salary:</strong> <span id="job-salary">-</span></p>
+                    <p><strong>🛠 Experience:</strong> <span id="job-experience">-</span></p>
+                    <p><strong>📄 Job Type:</strong> <span id="job-type">-</span></p>
+                    <hr>
+                    <h5 class="text-danger">Job Description</h5>
+                    <p id="job-description">Click on a job to see details.</p>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#applyModal">Apply Now</button>
+                    <button class="btn btn-secondary">Save Job</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="applyModal" tabindex="-1" aria-labelledby="applyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="applyModalLabel">Apply for Job</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>For more information and to apply, please log in to the Alumni Portal.</p>
+                    <a href="#" class="btn btn-danger">Go to Alumni Portal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p class="m-0">&copy; 2025 PUP Alumni Relations & Career Development Office</p>
+    </div>
+</body>
+</html>

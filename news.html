@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events | PUP Kiosk</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <style>
+         body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: url('PUP\ OVERVIEW\ -\ Landing.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed; /* Change from absolute to fixed */
+            top: 0;
+            left: 0;
+            width: 100vw; /* Ensures it covers the full width */
+            height: 100vh; /* Ensures it covers the full height */
+            background: url('PUP\ OVERVIEW\ -\ Landing.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(5px) brightness(0.7); /* Blur + Dark Overlay */
+            z-index: -1;
+        }   
+       
+       /* Header styles */
+       .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            padding: 20px;
+            background: #800000;
+            color: white;
+            position: relative;
+        }
+        .logo {
+            height: 80px; /* Increased size for better visibility */
+            width: auto;
+            margin: 0 20px;
+        }
+        .arcdo-logo {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .header div {
+            flex-grow: 1;
+            text-align: center;
+        }
+                
+        /* Event card styling */
+        .event-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+            margin-bottom: 30px; /* Added spacing to prevent overlap with footer */
+        }
+        
+        /* Hover effect on event cards */
+        .event-card:hover {
+            transform: scale(0.9);
+        }
+        
+        /* Event image container */
+        .event-card .event-image {
+            height: 180px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #dc3545;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        /* Ensure images fit properly inside event cards */
+        .event-card .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Badge styling for event types */
+        .event-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 5px;
+        }
+        
+        /* Button styling */
+        .btn-warning {
+            font-weight: bold;
+            border-radius: 10px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s;
+        }
+        
+        /* Button hover effect */
+        .btn-warning:hover {
+            background-color: #ffcc00;
+            transform: scale(1.05);
+        }
+        
+        /* Footer styles */
+        .footer {
+            padding: 10px 0; /* Adjust padding to fine-tune positioning */
+            background: #800000;
+            color: white;
+            position: fixed; /* Changed to fixed to always stay at the bottom */
+            bottom: 0;
+            width: 100%;
+        }
+                
+    </style>
+</head>
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalEventImage" src="" alt="Event Image" class="img-fluid mb-3">
+                <h5 id="modalEventTitle"></h5>
+                <p><strong>Date:</strong> <span id="modalEventDate"></span></p>
+                <p><strong>Venue:</strong> <span id="modalEventVenue"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<body>
+    <div class="header">
+        <img src="PUPLogo.png" alt="PUP Logo" class="logo">
+        <div>
+            <h3>POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</h3>
+            <h5>ALUMNI RELATIONS & CAREER DEVELOPMENT OFFICE</h5>
+        </div>
+        <img src="arcdologo.jpg" alt="ARCDo Logo" class="arcdo-logo">
+    </div>
+    
+    <div class="container mt-4">
+        <h2 class="text-black text-center">NEWS AND ANNOUNCEMENTS</h2>
+
+        <div id="eventCarousel" class="carousel slide mt-3" data-bs-ride="carousel">
+            <div class="carousel-indicators" id="carouselIndicators"></div>
+            <div class="carousel-inner" id="carouselInner"></div>
+            
+            <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="m-0 text-center w-100">&copy; 2025 PUP Alumni Relations & Career Development Office</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Define an array of event objects with title, date, venue, image, and badge type
+    const events = [
+        { title: "Workshop Title", date: "March 20, 2025", venue: "University Hall", img: "event1.jpg", badge: "Workshop" },
+        { title: "Seminar Title", date: "March 22, 2025", venue: "Main Auditorium", img: "event2.jpg", badge: "Seminar" },
+        { title: "Conference Title", date: "March 25, 2025", venue: "Grand Ballroom", img: "event3.jpg", badge: "Conference" },
+        { title: "Symposium Title", date: "April 5, 2025", venue: "Library Hall", img: "event4.jpg", badge: "Symposium" },
+        { title: "Career Fair", date: "April 10, 2025", venue: "Gymnasium", img: "event5.jpg", badge: "Fair" },
+    ];
+
+     // Get references to the Bootstrap carousel inner container and indicators
+    const carouselInner = document.getElementById("carouselInner");
+    const indicators = document.getElementById("carouselIndicators");
+    let slideGroups = [];
+
+    // Split events into groups of 3 for better layout within carousel slides
+    for (let i = 0; i < events.length; i += 3) {
+        slideGroups.push(events.slice(i, i + 3));
+    }
+
+    // Iterate over grouped events to create carousel items dynamically
+    slideGroups.forEach((group, index) => {
+        // Create and configure the carousel indicator buttons
+        const indicator = document.createElement("button");
+        indicator.type = "button";
+        indicator.setAttribute("data-bs-target", "#eventCarousel");
+        indicator.setAttribute("data-bs-slide-to", index);
+        if (index === 0) indicator.classList.add("active"); // Set first indicator as active
+        indicators.appendChild(indicator);
+
+         // Create a new carousel item
+        const carouselItem = document.createElement("div");
+        carouselItem.classList.add("carousel-item");
+        if (index === 0) carouselItem.classList.add("active"); // Set first item as active
+
+        const row = document.createElement("div");
+        row.classList.add("row");
+
+        // Generate individual event cards for the current slide
+        group.forEach((event, i) => {
+            const col = document.createElement("div");
+            col.classList.add("col-md-4");  // Bootstrap grid system for three items per row
+            col.innerHTML = `
+                <div class="event-card">
+                    <span class="event-badge">${event.badge}</span>
+                    <div class="event-image"><img src="${event.img}" alt="${event.title}"></div>
+                    <h5>${event.title}</h5>
+                    <p><strong>Date:</strong> ${event.date}</p>
+                    <p><strong>Venue:</strong> ${event.venue}</p>
+                    <button class="btn btn-warning read-more" data-index="${i}" data-bs-toggle="modal" data-bs-target="#eventModal">Read More</button>
+                </div>
+            `;
+            row.appendChild(col);  // Add event card to the row
+        });
+
+        // Append row to the carousel item, then add it to the carousel inner container
+        carouselItem.appendChild(row);
+        carouselInner.appendChild(carouselItem);
+    });
+
+    // Event listener for modal
+    document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("read-more")) {
+            const index = e.target.getAttribute("data-index");
+            const event = events[index];
+
+            document.getElementById("modalEventTitle").innerText = event.title;
+            document.getElementById("modalEventDate").innerText = event.date;
+            document.getElementById("modalEventVenue").innerText = event.venue;
+            document.getElementById("modalEventImage").src = event.img;
+        }
+    });
+});
+
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: url('PUP\ OVERVIEW\ -\ Landing.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+body::before {
+    content: "";
+    position: fixed; /* Change from absolute to fixed */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ensures it covers the full width */
+    height: 100vh; /* Ensures it covers the full height */
+    background: url('PUP\ OVERVIEW\ -\ Landing.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(5px) brightness(0.7); /* Blur + Dark Overlay */
+    z-index: -1;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 20px;
+    background: #800000;
+    color: white;
+    position: relative;
+}
+.arcdo-logo {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.logo {
+    height: 80px; /* Increased size for better visibility */
+    width: auto;
+    margin: 0 20px;
+}
+.header div {
+    flex-grow: 1;
+    text-align: center;
+}
+.glass-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    justify-content: center;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1200px; /* Increased max-width for larger screens */
+    position: relative;
+}
+.btn-tile {
+    width: 100%;
+    height: 200px; /* Increased height for better kiosk fit */
+    background: #800000;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px; /* Adjusted for better readability */
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+.btn-tile i {
+    font-size: 50px; /* Increased icon size for visibility */
+    margin-bottom: 10px;
+}
+.footer {
+    padding: 10px 0; /* Adjust padding to fine-tune positioning */
+    background: #800000;
+    color: white;
+    position: fixed; /* Changed to fixed to always stay at the bottom */
+    bottom: 0;
+    width: 100%;
+}
+.carousel-container {
+    display: none;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px; /* Increased max-width for readability */
+    
+}
+@media (max-width: 1024px) {
+    .glass-panel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .btn-tile {
+        height: 180px;
+    }
+}
+@media (max-width: 768px) {
+    .glass-panel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .btn-tile {
+        height: 160px; /* Adjusted height for smaller screens */
+        font-size: 18px;
+    }
+    .btn-tile i {
+        font-size: 40px;
+    }
+}
+@media (max-width: 480px) {
+    .glass-panel {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .btn-tile {
+        height: 140px; /* Further adjustment for very small screens */
+        font-size: 16px;
+    }
+    .btn-tile i {
+        font-size: 35px;
+    }
+}
