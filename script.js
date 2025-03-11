@@ -8,7 +8,7 @@ function resetTimer() {
         document.getElementById("main-content").style.display = "none";
         document.getElementById("carouselExample").style.display = "block";
         new bootstrap.Carousel(document.querySelector('#carouselExample'), {interval: 5000, ride: 'carousel'});
-    }, 8000);
+    }, 2000);
 }
 
 document.addEventListener("mousemove", resetTimer);

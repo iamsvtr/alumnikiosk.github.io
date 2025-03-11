@@ -81,41 +81,109 @@
             width: 100%;
         }
 
-               /* Assistive Touch Button */
-               .assistive-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            cursor: grab;
-        }
+/* Assistive Touch Ball */
+.touch-ball {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    user-select: none; /* Prevent text selection */
+    touch-action: none; /* Prevent default scrolling on touch */
+}
 
-        .assistive-touch {
-            width: 60px;
-            height: 60px;
-            background: #800000;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-        
-        .assistive-touch:hover {
-            transform: scale(1.1);      
-            user-select: none;
-        }
+.touch-ball:active {
+    cursor: grabbing;
+}
 
-      .assistive-touch:focus {
-            outline: none;
-         } 
-     
-        
     </style>
+    <script>
+        function showJobDetails(title, description, location, salary, experience, type) {
+            document.getElementById('job-title').innerText = title;
+            document.getElementById('job-description').innerText = description;
+            document.getElementById('job-location').innerText = location;
+            document.getElementById('job-salary').innerText = salary;
+            document.getElementById('job-experience').innerText = experience;
+            document.getElementById('job-type').innerText = type;
+        }
 
+        function toggleMenu() {
+            const menu = document.getElementById("assistiveMenu");
+            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById("assistiveMenu");
+            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+    const touchBall = document.querySelector(".touch-ball");
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    // Function to handle drag start
+    function startDrag(e) {
+        e.preventDefault(); // Prevent unwanted behaviors
+        isDragging = true;
+        
+        // Get initial position based on mouse or touch
+        const event = e.type.includes("touch") ? e.touches[0] : e;
+        offsetX = event.clientX - touchBall.getBoundingClientRect().left;
+        offsetY = event.clientY - touchBall.getBoundingClientRect().top;
+    }
+
+    // Function to handle dragging movement
+    function dragMove(e) {
+        if (!isDragging) return;
+        const event = e.type.includes("touch") ? e.touches[0] : e;
+        let newX = event.clientX - offsetX;
+        let newY = event.clientY - offsetY;
+
+        // Ensure the ball stays within viewport
+        newX = Math.max(0, Math.min(window.innerWidth - touchBall.clientWidth, newX));
+        newY = Math.max(0, Math.min(window.innerHeight - touchBall.clientHeight, newY));
+
+        touchBall.style.left = `${newX}px`;
+        touchBall.style.top = `${newY}px`;
+        touchBall.style.position = "fixed";
+    }
+
+    // Function to stop dragging
+    function stopDrag() {
+        isDragging = false;
+    }
+
+    // Attach event listeners
+    touchBall.addEventListener("mousedown", startDrag);
+    touchBall.addEventListener("touchstart", startDrag);
+
+    document.addEventListener("mousemove", dragMove);
+    document.addEventListener("touchmove", dragMove);
+
+    document.addEventListener("mouseup", stopDrag);
+    document.addEventListener("touchend", stopDrag);
+});
+
+
+    </script>
 </head>
 <body>
     <div class="header">
@@ -210,65 +278,15 @@
         </div>
     </div>
 
-        <!-- Assistive Touch Button -->
-    <div class="assistive-container" id="assistiveContainer">
-        <div class="assistive-touch" id="assistiveTouch">🏠</div>
-    </div>
+    <div class="touch-ball" onclick="toggleMenu()">☰</div>
+        <div class="assistive-menu" id="assistiveMenu">
+            <button onclick="scrollToTop()">⬆</button>
+            <button data-bs-toggle="modal" data-bs-target="#applyModal">📩</button>
+            <button onclick="location.reload()">🔄</button>
+        </div>
     
     <div class="footer">
         <p class="m-0">&copy; 2025 PUP Alumni Relations & Career Development Office</p>
     </div>
-
-    <script>
-        function showJobDetails(title, description, location, salary, experience, type) {
-            document.getElementById('job-title').innerText = title;
-            document.getElementById('job-description').innerText = description;
-            document.getElementById('job-location').innerText = location;
-            document.getElementById('job-salary').innerText = salary;
-            document.getElementById('job-experience').innerText = experience;
-            document.getElementById('job-type').innerText = type;
-        }
-
-         // Assistive touch 
-
-                let assistiveTouch = document.getElementById("assistiveTouch");
-        let assistiveContainer = document.getElementById("assistiveContainer");
-        let clickCount = 0;
-        
-        assistiveTouch.addEventListener("click", function() {
-            clickCount++;
-            if (clickCount === 2) {
-                window.location.href = 'index.html';
-            }
-            setTimeout(() => { clickCount = 0; }, 1000);
-        });
-        
-        let isDragging = false;
-        let offsetX, offsetY;
-
-        assistiveContainer.addEventListener("mousedown", function(e) {
-            isDragging = true;
-            offsetX = e.clientX - assistiveContainer.getBoundingClientRect().left;
-            offsetY = e.clientY - assistiveContainer.getBoundingClientRect().top;
-            assistiveContainer.style.cursor = "grabbing";
-        });
-
-        document.addEventListener("mousemove", function(e) {
-            if (isDragging) {
-                assistiveContainer.style.left = e.clientX - offsetX + "px";
-                assistiveContainer.style.top = e.clientY - offsetY + "px";
-            }
-        });
-
-        document.addEventListener("mouseup", function() {
-            isDragging = false;
-            assistiveContainer.style.cursor = "grab";
-        });
-    
-
-
-    </script>
-
-
 </body>
 </html>

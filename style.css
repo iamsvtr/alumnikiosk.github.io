@@ -85,12 +85,18 @@ body::before {
     width: 100%;
 }
 .carousel-container {
-    display: none;
+    display: flex; /* Ensures proper centering */
     margin: 20px auto;
     width: 80%;
-    max-width: 800px; /* Increased max-width for readability */
-    
+    max-width: 800px; /* Increased max-width for readability */   
+    justify-content: center;   
+    align-items: center;
 }
+
+
+
+
+
 @media (max-width: 1024px) {
     .glass-panel {
         grid-template-columns: repeat(2, 1fr);
